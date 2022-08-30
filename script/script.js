@@ -10,13 +10,27 @@ function changeSize(size) {
     
         drawingPad.appendChild(div);
     }
-    
+}
+
+function draw() {
     const pixels = document.querySelectorAll('.drawing-pixel');
+
+    let down;
+    let isDown = () => {
+        down = true;
+    };
+    let notDown = () => {
+        down = false;
+    };
     
     pixels.forEach((pixel) => {
+        pixel.addEventListener('mousedown', isDown);
         pixel.addEventListener('mouseover', () => {
-            pixel.style.backgroundColor = "black";
+            if (down === true) {
+                pixel.style.backgroundColor = "black";
+            }
         });
+        pixel.addEventListener('mouseup', notDown);
     });
 }
 
@@ -32,6 +46,8 @@ resizeBtn.addEventListener('click', () => {
     });
 
     changeSize(size);
+    draw();
 });
 
 changeSize(16);
+draw();
