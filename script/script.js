@@ -24,7 +24,13 @@ function draw() {
     };
     
     pixels.forEach((pixel) => {
-        pixel.addEventListener('mousedown', isDown);
+
+        pixel.addEventListener('mousedown', () => {
+            isDown();
+            // The same pixel
+            pixel.style.backgroundColor = "black";
+        });
+
         pixel.addEventListener('mouseover', () => {
             if (down === true) {
                 pixel.style.backgroundColor = "black";
